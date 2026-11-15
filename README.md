@@ -40,3 +40,33 @@ A deterministic, offline-first research dashboard for the make.fun **Build the b
 ## Execution note
 
 The connected GitHub workflow can maintain source files, but it does not itself provide the official kit runtime, a local browser, or an eligible agent-session transcript. Those gates must be satisfied and evidenced before an entry can be called ready.
+
+
+## Verified engineering baseline (2026-11-15)
+
+The official development kit was downloaded from make.fun in GitHub Actions and all **20 manifest-listed files** passed their individual SHA-256 and size checks. Runtime used Node.js **v22.23.4**.
+
+The unmodified official starter was executed against the sealed snapshot:
+
+- Input: 758 protocols; 40 watchlist slugs.
+- Output: 200 ranked rows (40 watchlist + 160 early candidates).
+- Dashboard: 3 static files; dossier generated successfully.
+- Three starter screenshot files were copied into the baseline output.
+- The baseline smoke-test workflow completed successfully: [run 43716546759](https://github.com/Sirahwaz/-midad-token-launch-radar/actions/runs/43716546759).
+
+This is a **starter smoke test**, not the official make.fun pre-submit check and not a competition submission.
+
+## Known baseline weaknesses to repair
+
+An independent audit of the sealed snapshot found 198 candidates under the explicit watchlist exclusion rules (40 watchlist + 158 eligible below-floor candidates). The starter instead selects 160 below-floor protocols by TVL alone. Compared with the rule-aligned candidate set, that baseline selection contains 39 false-positive slugs and misses 37 eligible slugs.
+
+Next model work must therefore:
+
+1. Preserve all 40 watchlist slugs.
+2. Apply the same exclusion logic to early candidates (bridge/wrapped/staked products, CEX, version-marked names and exchange-prefixed names).
+3. Replace the starter's TVL-only implied-value heuristic with a documented, snapshot-only comparable-token model.
+4. Backtest the model on tokenized protocols without leaking the target into its own comparables; report calibration and uncertainty.
+5. Replace starter sample screenshots with genuine captures of the final dashboard.
+6. Run the official pre-submit checks and assemble authentic agent-session transcripts.
+
+No wallet has been connected or signed, no entry has been submitted, and no funds have been moved.
