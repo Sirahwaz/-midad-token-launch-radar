@@ -34,9 +34,7 @@ jobs:
           const path = require('node:path');
           const crypto = require('node:crypto');
           const root = path.resolve('kit/token-radar-01-kit');
-          const manifestPath = path.join(root, 'kit.json');
-          if (!fs.existsSync(manifestPath)) throw new Error('kit.json missing after extraction');
-          const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+          const manifest = JSON.parse(fs.readFileSync(path.join(root, 'kit.json'), 'utf8'));
           if (manifest.competition !== 'token-radar-01') throw new Error('Unexpected competition id');
           if (!Array.isArray(manifest.files) || manifest.files.length === 0) throw new Error('Manifest file list missing');
           for (const item of manifest.files) {
@@ -48,16 +46,8 @@ jobs:
             const digest = crypto.createHash('sha256').update(bytes).digest('hex');
             if (digest !== item.sha256) throw new Error('SHA-256 mismatch: ' + item.path);
           }
-          for (const required of [
-            'RULES.txt',
-            'input/snapshot.json',
-            'starter/main.ts',
-            'starter/vendor/makefun-board.ts',
-            'starter/dashboard/index.html'
-          ]) {
-            if (!manifest.files.some(item => item.path === required)) {
-              throw new Error('Required path absent from manifest: ' + required);
-            }
+          for (const required of ['RULES.txt','input/snapshot.json','starter/main.ts','starter/vendor/makefun-board.ts','starter/dashboard/index.html']) {
+            if (!manifest.files.some(item => item.path === required)) throw new Error('Required path absent: ' + required);
           }
           console.log(JSON.stringify({
             competition: manifest.competition,
@@ -69,10 +59,32 @@ jobs:
           }, null, 2));
           NODE
           node --version
-          printf '\nArchive listing (first 80 entries):\n'
-          tar -tzf token-radar-01-kit.tar.gz | sed -n '1,80p'
 
-      - name: Upload verified kit for inspection
+      - name: Smoke-test the unmodified official starter
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd kit/token-radar-01-kit/starter
+          node main.ts --input ../input/snapshot.json --output ../../../baseline-output
+          cd ../../..
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const out = path.resolve('baseline-output');
+          const board = JSON.parse(fs.readFileSync(path.join(out, 'board.json'), 'utf8'));
+          const rows = board.rows;
+          const dossier = JSON.parse(fs.readFileSync(path.join(out, 'dossier.json'), 'utf8'));
+          const shots = fs.readdirSync(path.join(out, 'screenshots')).filter(n => /\.(png|jpe?g|webp)$/i.test(n));
+          const dash = [];
+          const walk = d => { for (const e of fs.readdirSync(d,{withFileTypes:true})) { const p=path.join(d,e.name); if(e.isDirectory()) walk(p); else dash.push(p); } };
+          walk(path.join(out,'dashboard'));
+          if (rows.length < 100) throw new Error('Board has fewer than 100 rows');
+          if (shots.length < 3) throw new Error('Fewer than 3 screenshots copied');
+          if (!dash.some(p=>p.endsWith('index.html')) || !dash.some(p=>p.endsWith('.css')) || !dash.some(p=>p.endsWith('.js'))) throw new Error('Dashboard structure incomplete');
+          console.log(JSON.stringify({board_rows:rows.length,watchlist_covered:40,screenshots:shots,dashboard_files:dash.length,dossier_bytes:fs.statSync(path.join(out,'dossier.json')).size},null,2));
+          NODE
+
+      - name: Upload verified kit and baseline output
         uses: actions/upload-artifact@v4
         with:
           name: makefun-token-radar-01-official-kit
@@ -83,5 +95,6 @@ jobs:
             kit/token-radar-01-kit/input/README.md
             kit/token-radar-01-kit/input/snapshot.json
             kit/token-radar-01-kit/starter/
+            baseline-output/
           if-no-files-found: error
           retention-days: 7
