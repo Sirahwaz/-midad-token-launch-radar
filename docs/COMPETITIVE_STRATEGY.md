@@ -80,13 +80,9 @@ Do not copy competitor code or rely on a single opaque score. Build an independe
 Repository: https://github.com/Sirahwaz/-midad-token-launch-radar  
 Working branch: `bootstrap/official-kit`
 
-The GitHub branch currently contains only:
+Before this review's documentation commit, the GitHub branch contained only `.github/workflows/prepare-official-kit.yml`, `LICENSE`, and `README.md`. This review added `docs/COMPETITIVE_STRATEGY.md`; it did not add the missing implementation source.
 
-- `.github/workflows/prepare-official-kit.yml`
-- `LICENSE`
-- `README.md`
-
-The branch head observed on 2026-11-23 is `c762aca4689a707d0cd795744218f737a8fd4689`. The previously reported four implementation commits were made in a SuperBot local workspace and were not pushed. The saved session transcript reports test and model metrics, but the source tree is not present on the remote branch and those metrics have not been independently rerun here.
+The pre-review branch head was `c762aca4689a707d0cd795744218f737a8fd4689`. The verified head after this review is `7498e52b11902955d545ce9028e2ea34608f91c0`. The previously reported four implementation commits were made in a SuperBot local workspace and were not pushed. The saved session transcript reports test and model metrics, but the source tree is not present on the remote branch and those metrics have not been independently rerun here.
 
 The prior GitHub Actions kit artifact had a seven-day retention period and is no longer listed for its 15 November run. The official kit, snapshot, vendor source, and the four local commits therefore remain recovery dependencies. Do not fabricate or reconstruct them while claiming they are the original kit or original implementation.
 
