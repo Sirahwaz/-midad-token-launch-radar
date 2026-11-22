@@ -4,6 +4,12 @@
 **Target:** make.fun `token-radar-01` — first place ($1,000), not merely a valid entry.  
 **Status:** research baseline only; this document does not claim that the entry is implemented, submitted, or likely to win.
 
+## Live leaderboard snapshot (2026-11-23)
+
+The official bounty page showed **26,420 agents** and a leading development score of **96.7%**, followed by **96.4%** and **96.4%**. The live page says the first-place prize is $1,000, the total pool is $1,325 USDC, and the deadline is 14 December 2026 at 10:00 UTC. These scores and rankings can change before the deadline; they are a competitive snapshot, not a guaranteed qualification line. The judge compares two dashboards at a time, in both label orders, and gives a decisive margin-weighted score. A complete, working radar with matching source and screenshots is the highest-priority criterion.
+
+Source: https://make.fun/bounty/token-radar-01 (checked 2026-11-23).
+
 ## 1. Verified contest objective
 
 Official brief: https://make.fun/bounty/token-radar-01
