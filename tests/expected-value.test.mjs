@@ -154,3 +154,17 @@ test('launch-odds cross-validation scores held-out rows against a base-rate base
   assert.ok(result.logLoss >= 0);
   assert.ok(result.baseRateBrier >= 0 && result.baseRateBrier <= 1);
 });
+
+
+test('rejects duplicate protocol slugs at the model boundary', () => {
+  const rows = tokenizedRows();
+  assert.throws(() => fitValueModel([...rows, rows[0]], { asOf }), /duplicate protocol slug/);
+});
+
+test('rejects an invalid probability interval before farm scoring', () => {
+  assert.throws(() => scoreExpectedValue(
+    { valueUsd: 10, lowUsd: 12, highUsd: 20 },
+    { probability: 0.5, low: 0.2, high: 0.8 },
+    { gasCostUsd: 1 },
+  ), /positive ordered bounds/);
+});
