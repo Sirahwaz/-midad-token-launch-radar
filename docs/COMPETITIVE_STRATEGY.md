@@ -84,7 +84,7 @@ Before this review's documentation commit, the GitHub branch contained only `.gi
 
 The pre-review branch head was `c762aca4689a707d0cd795744218f737a8fd4689`. The verified head after this review is `7498e52b11902955d545ce9028e2ea34608f91c0`. The previously reported four implementation commits were made in a SuperBot local workspace and were not pushed. The saved session transcript reports test and model metrics, but the source tree is not present on the remote branch and those metrics have not been independently rerun here.
 
-The prior GitHub Actions kit artifact had a seven-day retention period and is no longer listed for its 15 November run. The official kit, snapshot, vendor source, and the four local commits therefore remain recovery dependencies. Do not fabricate or reconstruct them while claiming they are the original kit or original implementation.
+The prior GitHub Actions kit artifact had a seven-day retention period and is no longer listed for its 15 November run. **The project owner clarified on 2026-11-23 that SuperBot stopped at its spend barrier before creating any project files or implementation commits.** There are no four local commits and no native SuperBot JSONL build transcript to recover. Earlier notes claiming otherwise are withdrawn. The official kit, snapshot, and vendor source must be downloaded again and hash-verified.
 
 ## 5. Execution order
 
@@ -92,8 +92,10 @@ The prior GitHub Actions kit artifact had a seven-day retention period and is no
 2. Recover the exact official kit and sealed snapshot from an authorized retained artifact or existing source; verify all manifest hashes before use.
 3. Reconcile the recovered source with the current branch without overwriting existing history.
 4. Re-run tests and official checks from a clean state; fix the transcript gate before any submission.
-5. Upgrade the model and dashboard against the competitive criteria above, using original implementation and evidence.
-6. Capture genuine screenshots, rebuild the dossier twice, and compare output bytes.
-7. Review the exact commit, transcript bundle, wallet/payout conditions, and submission receipt. Obtain explicit approval before signing or submitting.
+5. Start a fresh native SuperBot session before the first counted write. The current transcript gate (updated from 17–21 November) requires a run record, actual harness-recorded session logs, provider usage/pricing, declared harness/model/effort, system prompt and instruction files, parent chats when a run was handed off, and enough session evidence to reproduce at least 30% of counted lines. At least five assistant turns must contain text/thinking, and the entrypoint must be authored and revised across at least two assistant messages. The agent must write the final source itself; copied code from other repositories or downloaded public code can trigger disqualification.
+6. Upgrade the model and dashboard against the competitive criteria above using only code authored in the eligible recorded session. The existing ChatGPT/GitHub prototype is research material, not transcript-credited deliverable code.
+7. Capture genuine screenshots, rebuild the dossier twice, compare output bytes, and run every official gate.
 
-**No entry has been submitted, no wallet has been connected or signed, and no prize has been earned or claimed.**
+8. Review the exact commit, complete transcript bundle, wallet/payout conditions, and submission receipt. Obtain explicit approval before signing or submitting.
+
+**No entry has been submitted, no wallet has been signed, and no prize has been earned or claimed.**
