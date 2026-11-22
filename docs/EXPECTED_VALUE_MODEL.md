@@ -12,7 +12,7 @@ The module is deliberately independent of the missing official-kit files. It acc
 
 ## Value model
 
-1. Fit `ln(mcap_usd) = intercept + slope × ln(tvl_usd)` on positive-market-cap comparables.
+1. Fit `ln(mcap_usd) = intercept + slope × ln(tvl_usd)` on positive-market-cap comparables after excluding bridge, canonical bridge, liquid staking/restaking, restaked BTC, CEX, wrapped/staked, version-marked, and exchange-prefixed products.
 2. Use deterministic Huber iteratively reweighted least squares to reduce the leverage of extreme comparables.
 3. Compute category residual medians and shrink them toward the pooled fit with `n / (n + categoryShrinkage)`; cap the effect.
 4. Apply bounded, explicit growth and maturity multipliers. These are priors, not coefficients claimed to have been learned from the sealed snapshot.
@@ -45,7 +45,7 @@ The module uses only Node.js built-ins and has no runtime network dependency.
 
 ## Verification and limitations
 
-The twelve tests in `tests/expected-value.test.mjs` cover robust-fit resistance to an extreme outlier, category shrinkage, positive and ordered value intervals, bounded growth/maturity adjustments, Bayesian cohort smoothing, leave-one-out exclusion, expected-value/farm-cost arithmetic, deterministic input ordering, value-model leave-one-out backtesting, and held-out odds evaluation.
+The thirteen tests in `tests/expected-value.test.mjs` cover robust-fit resistance to an extreme outlier, category shrinkage, positive and ordered value intervals, bounded growth/maturity adjustments, Bayesian cohort smoothing, leave-one-out exclusion, expected-value/farm-cost arithmetic, deterministic input ordering, value-model leave-one-out backtesting, and held-out odds evaluation.
 
 **Not yet established:**
 
@@ -56,6 +56,6 @@ The twelve tests in `tests/expected-value.test.mjs` cover robust-fit resistance 
 - The model is not yet wired into `main.ts`, the dashboard, or the official dossier.
 - This module is not a substitute for the official kit, official exclusion rules, genuine screenshots, or eligible agent-session transcripts.
 
-CI verification: GitHub Actions run [45077881142](https://github.com/Sirahwaz/-midad-token-launch-radar/actions/runs/45077881142) completed successfully on Node.js 22.23.4; all 12 tests passed. This validates the synthetic test suite only, not the official snapshot or competition entry.
+CI verification: GitHub Actions run [45077949747](https://github.com/Sirahwaz/-midad-token-launch-radar/actions/runs/45077949747) completed successfully on Node.js 22.23.4; all 13 tests passed. This validates the synthetic test suite only, not the official snapshot or competition entry.
 
 The next integration gate is to recover the exact official snapshot and vendor kit, then run the full selection, model, dashboard, determinism, and official transcript checks before any submission.
