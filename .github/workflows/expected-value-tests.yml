@@ -1,0 +1,31 @@
+name: Expected-value model tests
+
+on:
+  push:
+    branches:
+      - bootstrap/official-kit
+    paths:
+      - "lib/expected-value.mjs"
+      - "tests/expected-value.test.mjs"
+      - ".github/workflows/expected-value-tests.yml"
+  pull_request:
+    paths:
+      - "lib/expected-value.mjs"
+      - "tests/expected-value.test.mjs"
+      - ".github/workflows/expected-value-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js 22.23.4
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.4
+      - name: Run expected-value model tests
+        run: node --test tests/expected-value.test.mjs
