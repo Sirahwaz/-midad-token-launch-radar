@@ -168,3 +168,17 @@ test('rejects an invalid probability interval before farm scoring', () => {
     { gasCostUsd: 1 },
   ), /positive ordered bounds/);
 });
+
+
+test('value comparables exclude bridge, staking, wrapped, versioned, and exchange products', () => {
+  const rows = tokenizedRows();
+  const excluded = [
+    { ...rows[0], slug: 'bridge-product', category: 'Bridge', mcap_usd: 9e12 },
+    { ...rows[1], slug: 'staking-product', category: 'Liquid Staking', mcap_usd: 9e12 },
+    { ...rows[2], slug: 'versioned-product', name: 'Protocol V2', mcap_usd: 9e12 },
+    { ...rows[3], slug: 'wrapped-product', name: 'Wrapped Asset', mcap_usd: 9e12 },
+    { ...rows[4], slug: 'exchange-product', name: 'Binance XYZ', mcap_usd: 9e12 },
+  ];
+  const model = fitValueModel([...rows, ...excluded], { asOf });
+  assert.equal(model.comparableCount, rows.length);
+});
