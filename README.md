@@ -21,6 +21,7 @@ The repository is not submission-ready. No entry has been submitted, no wallet h
 ### Verified work in the current branch
 
 - Competitive review and execution gates: `docs/COMPETITIVE_STRATEGY.md`.
+- Transcript-safe SuperBot build handoff: `docs/BUILD_HANDOFF_SUPERBOT.md`.
 - An independent expected-value model prototype: `lib/expected-value.mjs`.
 - Thirteen synthetic unit tests: `tests/expected-value.test.mjs`.
 - Node.js 22.23.4 CI passed: [run 45077949747](https://github.com/Sirahwaz/-midad-token-launch-radar/actions/runs/45077949747).
