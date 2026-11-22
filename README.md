@@ -34,7 +34,7 @@ The current remote branch contains ChatGPT-assisted research/prototype files, bu
 
 The current branch does not contain:
 
-- `main.ts` and the original `lib/` implementation from the previous SuperBot workspace.
+- A newly authored `main.ts` and supporting source files, written inside an eligible recorded agent session.
 - The byte-identical official `vendor/makefun-board.ts`, official kit, and sealed snapshot.
 - Final `dashboard/`, three genuine screenshots, generated `board.json`, and `dossier.json`.
 - A valid, eligible native agent-session transcript bundle and complete run record.
@@ -45,10 +45,10 @@ The current branch does not contain:
 
 Two earlier reports disagree:
 
-- An older audit recorded 198 candidates (40 watchlist + 158 early) and 37 misses from the starter's TVL-only cut.
-- The later SuperBot session reported 178 candidates (40 + 138) and 17 misses, noting that `parentProtocol` was not among the snapshot's ten exposed fields.
+- An earlier audit note recorded 198 candidates (40 watchlist + 158 early) and 37 misses from the starter's TVL-only cut.
+- That count has not been independently re-verified against the current official kit and rules. The conflicting 178-candidate report is withdrawn because the user confirms SuperBot never created the claimed project files or session.
 
-Neither count is being treated as independently re-verified in this ChatGPT session. Reconcile the exact official `RULES.txt`, snapshot, and vendor helper before freezing the board.
+Recompute the exact census from the official `RULES.txt`, snapshot, and vendor helper before freezing the board.
 
 ## Non-negotiable integrity constraints
 
@@ -62,7 +62,7 @@ Neither count is being treated as independently re-verified in this ChatGPT sess
 
 ## Required execution sequence
 
-1. Recover the exact previous SuperBot workspace/source and its native session log, or obtain explicit approval to retrieve the exact official kit again and verify it against the recorded hashes.
+1. Retrieve the exact official kit again and verify every manifest hash. The user has explicitly authorized this retrieval and direct work on the connected GitHub repository.
 2. Reconcile the candidate counts against the official rules and sealed snapshot.
 3. Reconcile the recovered source with `bootstrap/official-kit` without overwriting history.
 4. Have the accepted recorded agent session author/revise the final entrypoint and dashboard; preserve the complete run record and usage-bearing transcripts.
@@ -84,4 +84,4 @@ This was a starter smoke test, not the official pre-submit check and not a compe
 
 ## Current next blocker
 
-Recover the original SuperBot workspace/session or authorize retrieval of the exact official kit again. Until the source, official snapshot, vendor helper, and eligible transcripts are available, do not claim that the entry is ready or submit it.
+Retrieve and hash-verify the official kit, then start the fresh, eligible recorded agent build session. Until the official snapshot, vendor helper, final authored source, and compliant transcripts are present, do not claim readiness or submit.
