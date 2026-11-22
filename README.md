@@ -30,14 +30,16 @@ The repository is not submission-ready. No entry has been submitted, no wallet h
 
 ### Missing submission components
 
-The current remote branch does not contain the official source implementation or the required submission assets:
+The current remote branch contains ChatGPT-assisted research/prototype files, but it does not contain an eligible, transcript-authored competition implementation or the required submission assets. The prototype in `lib/expected-value.mjs` and its tests were written through the GitHub connector, not in a make.fun-eligible recorded SuperBot session. Preserve them as research only; do not count or copy their lines into the final deliverable unless a valid recorded agent session independently authors/revises the final source in compliance with the current transcript gate.
+
+The current branch does not contain:
 
 - `main.ts` and the original `lib/` implementation from the previous SuperBot workspace.
 - The byte-identical official `vendor/makefun-board.ts`, official kit, and sealed snapshot.
 - Final `dashboard/`, three genuine screenshots, generated `board.json`, and `dossier.json`.
 - A valid, eligible native agent-session transcript bundle and complete run record.
 
-The prior SuperBot session reported four local commits and a recorded JSONL session, but those local source files and the native JSONL transcript are not present in this repository or the currently available Library files. The seven-day GitHub Actions artifact retention for the old kit run has elapsed. The official kit must not be silently recreated or represented as recovered.
+**Correction from the project owner (2026-11-23): SuperBot stopped at its spend limit before it created any project source files or implementation commits. No SuperBot implementation workspace, four local commits, or native JSONL build transcript exists. Earlier notes claiming those artifacts existed are withdrawn and must not be used as evidence.** The seven-day GitHub Actions artifact retention for the 15 November kit run has elapsed. The official kit must be retrieved and hash-verified again.
 
 ### Candidate-count discrepancy — unresolved
 
