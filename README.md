@@ -14,7 +14,7 @@ The entry requires a public repository created after the competition opened, an 
 
 ## Project status — 2026-11-23
 
-<badge>IN PROGRESS</badge>
+**Status: IN PROGRESS**
 
 The repository is not submission-ready. No entry has been submitted, no wallet has been signed, and no reward has been earned or claimed.
 
