@@ -45,7 +45,7 @@ The module uses only Node.js built-ins and has no runtime network dependency.
 
 ## Verification and limitations
 
-The ten tests in `tests/expected-value.test.mjs` cover robust-fit resistance to an extreme outlier, category shrinkage, positive and ordered value intervals, bounded growth/maturity adjustments, Bayesian cohort smoothing, leave-one-out exclusion, expected-value/farm-cost arithmetic, deterministic input ordering, value-model leave-one-out backtesting, and held-out odds evaluation.
+The twelve tests in `tests/expected-value.test.mjs` cover robust-fit resistance to an extreme outlier, category shrinkage, positive and ordered value intervals, bounded growth/maturity adjustments, Bayesian cohort smoothing, leave-one-out exclusion, expected-value/farm-cost arithmetic, deterministic input ordering, value-model leave-one-out backtesting, and held-out odds evaluation.
 
 **Not yet established:**
 
@@ -55,5 +55,7 @@ The ten tests in `tests/expected-value.test.mjs` cover robust-fit resistance to 
 - Odds calibration must be checked with Brier score, log loss, and reliability bins on the official snapshot.
 - The model is not yet wired into `main.ts`, the dashboard, or the official dossier.
 - This module is not a substitute for the official kit, official exclusion rules, genuine screenshots, or eligible agent-session transcripts.
+
+CI verification: GitHub Actions run [45077881142](https://github.com/Sirahwaz/-midad-token-launch-radar/actions/runs/45077881142) completed successfully on Node.js 22.23.4; all 12 tests passed. This validates the synthetic test suite only, not the official snapshot or competition entry.
 
 The next integration gate is to recover the exact official snapshot and vendor kit, then run the full selection, model, dashboard, determinism, and official transcript checks before any submission.
