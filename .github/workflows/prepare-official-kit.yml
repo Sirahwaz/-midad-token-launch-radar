@@ -1,4 +1,4 @@
-name: Prepare official make.fun kit
+name: Recover and verify official make.fun kit
 
 on:
   push:
@@ -84,17 +84,40 @@ jobs:
           console.log(JSON.stringify({board_rows:rows.length,watchlist_covered:40,screenshots:shots,dashboard_files:dash.length,dossier_bytes:fs.statSync(path.join(out,'dossier.json')).size},null,2));
           NODE
 
-      - name: Upload verified kit and baseline output
+      - name: Write reproducibility evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const crypto = require('node:crypto');
+          const root = path.resolve('kit/token-radar-01-kit');
+          const manifest = JSON.parse(fs.readFileSync(path.join(root, 'kit.json'), 'utf8'));
+          const files = manifest.files.map(item => {
+            const bytes = fs.readFileSync(path.join(root, item.path));
+            return { path: item.path, bytes: bytes.length, sha256: crypto.createHash('sha256').update(bytes).digest('hex') };
+          });
+          const evidence = {
+            competition: manifest.competition,
+            phase: manifest.phase,
+            harness_version: manifest.harness_version,
+            manifest_file_count: files.length,
+            files,
+            runtime: process.version,
+            verified_at_utc: new Date().toISOString()
+          };
+          fs.writeFileSync('kit-evidence.json', JSON.stringify(evidence, null, 2) + '\\n');
+          NODE
+
+      - name: Upload complete verified kit, baseline, and evidence
         uses: actions/upload-artifact@v4
         with:
           name: makefun-token-radar-01-official-kit
           path: |
             token-radar-01-kit.tar.gz
-            kit/token-radar-01-kit/kit.json
-            kit/token-radar-01-kit/RULES.txt
-            kit/token-radar-01-kit/input/README.md
-            kit/token-radar-01-kit/input/snapshot.json
-            kit/token-radar-01-kit/starter/
+            kit/token-radar-01-kit/
             baseline-output/
+            kit-evidence.json
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 30
