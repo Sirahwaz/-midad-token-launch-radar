@@ -1,0 +1,55 @@
+name: Retrieve official Make.fun kit
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
+jobs:
+  retrieve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and unpack official kit
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --retry-delay 2 --output kit.tar.gz https://make.fun/c/token-radar-01/kit
+          file kit.tar.gz
+          tar -tzf kit.tar.gz > kit-files.txt
+          mkdir -p kit-extracted
+          tar -xzf kit.tar.gz -C kit-extracted
+      - name: Verify manifest hashes and sizes
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs=require('node:fs'), path=require('node:path'), crypto=require('node:crypto');
+          const root=path.resolve('kit-extracted');
+          const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>{const p=path.join(d,e.name);return e.isDirectory()?walk(p):[p]});
+          const all=walk(root), mf=all.find(p=>path.basename(p)==='kit.json');
+          if(!mf){fs.writeFileSync('verification.txt','FAIL: kit.json not found\\n');process.exit(2)}
+          const m=JSON.parse(fs.readFileSync(mf,'utf8')), base=path.dirname(mf), lines=[
+            'bundle_sha256='+m.bundle_sha256,'harness_version='+m.harness_version,'scorer_version='+m.scorer_version,'manifest_files='+(m.files||[]).length
+          ]; let failures=0;
+          for(const f of m.files||[]){const p=path.join(base,f.path);if(!fs.existsSync(p)){lines.push('MISSING '+f.path);failures++;continue}
+            const b=fs.readFileSync(p), sha=crypto.createHash('sha256').update(b).digest('hex'),ok=b.length===f.size&&sha===f.sha256;
+            lines.push((ok?'PASS ':'FAIL ')+f.path+' bytes='+b.length+' sha256='+sha);if(!ok)failures++}
+          lines.push('verification='+(failures?'FAIL':'PASS')+' failures='+failures);
+          fs.writeFileSync('verification.txt',lines.join('\\n')+'\\n');console.log(lines.join('\\n'));if(failures)process.exit(1);
+          NODE
+      - name: Upload official kit and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: makefun-token-radar-official-kit
+          path: |
+            kit.tar.gz
+            kit-files.txt
+            kit-extracted/**
+            verification.txt
+          if-no-files-found: warn
+          retention-days: 30
