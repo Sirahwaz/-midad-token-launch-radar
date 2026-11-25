@@ -1,69 +1,11 @@
-# MIDAD Token Launch Radar
 
-A deterministic, offline-first research dashboard for the make.fun **Build the best token launch radar** bounty.
+---
 
-## Competition
+## Submission checklist
 
-- Official brief: https://make.fun/bounty/token-radar-01
-- Starter kit: https://make.fun/c/token-radar-01/kit
-- Prize pool: 1,325 USDC in total; **$1,000 is first place only**. Other paid places receive smaller rewards.
-- Deadline: 14 December 2026, 10:00 UTC.
-- Payout is in USDC on Solana. Ranking and payout are not guaranteed.
+### Pre-submission gates
 
-The entry requires a public repository created after the competition opened, an OSI-approved license, root `main.ts`, the unmodified official `vendor/makefun-board.ts`, an offline static `dashboard/`, a complete watchlist board with at least 100 rows and a farm plan per row, three genuine screenshots, `dossier.json`, and eligible native agent-session transcripts.
-
-## Project status — 2026-11-23
-
-**Status: IN PROGRESS**
-
-The repository is not submission-ready. No entry has been submitted, no wallet has been signed, and no reward has been earned or claimed.
-
-### Verified work in the current branch
-
-- Competitive review and execution gates: `docs/COMPETITIVE_STRATEGY.md`.
-- Transcript-safe SuperBot build handoff: `docs/BUILD_HANDOFF_SUPERBOT.md`.
-- An independent expected-value model prototype: `lib/expected-value.mjs`.
-- Thirteen synthetic unit tests: `tests/expected-value.test.mjs`.
-- Node.js 22.23.4 CI passed: [run 45077949747](https://github.com/Sirahwaz/-midad-token-launch-radar/actions/runs/45077949747).
-- Model interface and limitations: `docs/EXPECTED_VALUE_MODEL.md`.
-
-**Important:** the model prototype is not yet integrated into the competition entrypoint and has not been calibrated against the official sealed snapshot. Passing synthetic tests does not establish competition readiness or predictive performance.
-
-### Missing submission components
-
-The current remote branch contains ChatGPT-assisted research/prototype files, but it does not contain an eligible, transcript-authored competition implementation or the required submission assets. The prototype in `lib/expected-value.mjs` and its tests were written through the GitHub connector, not in a make.fun-eligible recorded SuperBot session. Preserve them as research only; do not count or copy their lines into the final deliverable unless a valid recorded agent session independently authors/revises the final source in compliance with the current transcript gate.
-
-The current branch does not contain:
-
-- A newly authored `main.ts` and supporting source files, written inside an eligible recorded agent session.
-- The byte-identical official `vendor/makefun-board.ts`, official kit, and sealed snapshot.
-- Final `dashboard/`, three genuine screenshots, generated `board.json`, and `dossier.json`.
-- A valid, eligible native agent-session transcript bundle and complete run record.
-
-**Correction from the project owner (2026-11-23): SuperBot stopped at its spend limit before it created any project source files or implementation commits. No SuperBot implementation workspace, four local commits, or native JSONL build transcript exists. Earlier notes claiming those artifacts existed are withdrawn and must not be used as evidence.** The seven-day GitHub Actions artifact retention for the 15 November kit run has elapsed. The official kit must be retrieved and hash-verified again.
-
-### Candidate-count discrepancy — unresolved
-
-Two earlier reports disagree:
-
-- An earlier audit note recorded 198 candidates (40 watchlist + 158 early) and 37 misses from the starter's TVL-only cut.
-- That count has not been independently re-verified against the current official kit and rules. The conflicting 178-candidate report is withdrawn because the user confirms SuperBot never created the claimed project files or session.
-
-Recompute the exact census from the official `RULES.txt`, snapshot, and vendor helper before freezing the board.
-
-## Non-negotiable integrity constraints
-
-1. Use the exact official kit, snapshot, rules, and vendor file. Do not modify the vendor file.
-2. Derive every score and farm plan from the supplied snapshot; preserve provenance and deterministic outputs.
-3. Do not fabricate protocol data, screenshots, test results, agent transcripts, submission status, or expected rewards.
-4. Keep the dashboard fully offline (no runtime network requests).
-5. Never commit API keys, wallet secrets, seed phrases, or private keys.
-6. Never sign, submit, or claim a reward without the required human approval.
-7. Do not present ChatGPT-authored prototype code as if an eligible SuperBot/Codex agent session authored it. The competition transcript gate checks authorship and may reject an entry without eligible recorded sessions.
-
-## Required execution sequence
-
-1. Retrieve the exact official kit again and verify every manifest hash. The user has explicitly authorized this retrieval and direct work on the connected GitHub repository.
+1. Retrieve the exact official kit again and verify every manifest hash.
 2. Reconcile the candidate counts against the official rules and sealed snapshot.
 3. Reconcile the recovered source with `bootstrap/official-kit` without overwriting history.
 4. Have the accepted recorded agent session author/revise the final entrypoint and dashboard; preserve the complete run record and usage-bearing transcripts.
@@ -72,17 +14,32 @@ Recompute the exact census from the official `RULES.txt`, snapshot, and vendor h
 7. Run the official checker, inspect every transcript-gate result, then review the exact commit and payout path.
 8. Obtain explicit approval before signing or submitting.
 
-## Verified engineering baseline (2026-11-15)
+### Required submission assets (per make.fun rules)
 
-The original GitHub Actions workflow reported that all 20 manifest-listed official-kit files passed individual SHA-256 and size checks, using Node.js v22.23.4. The unmodified starter smoke test reported:
+| Asset | Status | Notes |
+|-------|--------|-------|
+| Public repo (post-opening date) | ✔ | https://github.com/Sirahwaz/-midad-token-launch-radar |
+| OSI-approved license | ✔ | LICENSE present |
+| Root `main.ts` | ✗ | Not yet authored in eligible session |
+| Unmodified `vendor/makefun-board.ts` | ✗ | Must hash-verify from official kit |
+| Offline static `dashboard/` | ✗ | Missing |
+| Complete watchlist board (≥100 rows + farm plan) | ✗ | Candidate census not yet re-computed |
+| Three genuine screenshots | ✗ | Pending dashboard |
+| `dossier.json` | ✗ | Pending board generation |
+| Eligible native agent-session transcripts | ✗ | SuperBot never produced them (spend limit) |
 
-- Input: 758 protocols and 40 watchlist slugs.
-- Output: 200 rows (40 watchlist + 160 early candidates).
-- Three static dashboard files and a generated dossier.
-- Workflow: [run 43716546759](https://github.com/Sirahwaz/-midad-token-launch-radar/actions/runs/43716546759).
+### Known blockers
 
-This was a starter smoke test, not the official pre-submit check and not a competition submission. Its artifact is no longer retained.
+1. **No eligible agent-session transcript exists** — SuperBot stopped at its spend limit before creating project source files. No JSONL build transcript, no run record, no 7-day artifact. This is the primary submission blocker.
+2. **Official kit must be re-retrieved** — the 15 November GitHub Actions artifact retention has elapsed. Kit must be downloaded and hash-verified again from the official make.fun portal.
+3. **Candidate-count discrepancy unresolved** — conflicting reports (198 vs. 178) require re-computation from official RULES.txt and sealed snapshot.
 
-## Current next blocker
+### Preserved work (do not overwrite)
 
-Retrieve and hash-verify the official kit, then start the fresh, eligible recorded agent build session. Until the official snapshot, vendor helper, final authored source, and compliant transcripts are present, do not claim readiness or submit.
+- `lib/expected-value.mjs` — research prototype (not competition entrypoint).
+- `tests/expected-value.test.mjs` — 13 unit tests, all passing (CI #7: https://github.com/Sirahwaz/-midad-token-launch-radar/actions/runs/45077955327).
+- `docs/COMPETITIVE_STRATEGY.md` — competitive review and execution gates.
+- `docs/BUILD_HANDOFF_SUPERBOT.md` — transcript-safe SuperBot build handoff.
+- `docs/EXPECTED_VALUE_MODEL.md` — model interface and limitations.
+- `.github/workflows/expected-value-tests.yml` — Node.js 22.23.4 CI.
+- `.github/workflows/prepare-official-kit.yml` — kit verification workflow.
